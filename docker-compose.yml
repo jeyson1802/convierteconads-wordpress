@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - 9090:80
+      - 9091:80
     environment:
       - WORDPRESS_DB_HOST=db_ads:3306
       - WORDPRESS_DB_USER=$MYSQL_USER

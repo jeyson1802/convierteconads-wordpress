@@ -3,13 +3,13 @@ version: '3'
 services:
   db_ads:
     image: mysql:8.0
-    container_name: db
+    container_name: db_ads
     restart: unless-stopped
     env_file: .env
     environment:
       - MYSQL_DATABASE=wordpress
     volumes:
-      - ./dbdata:/var/lib/mysql
+      - ./dbdata_ads:/var/lib/mysql
     command: '--default-authentication-plugin=mysql_native_password'
     networks:
       - ads-network
@@ -18,7 +18,7 @@ services:
     depends_on:
       - db_ads
     image: wordpress:5.8.2
-    container_name: wordpress
+    container_name: wordpress_ads
     restart: unless-stopped
     env_file: .env
     ports:
@@ -29,8 +29,8 @@ services:
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-      - ./wordpress:/var/www/html
+      - ./uploads.ini.ads:/usr/local/etc/php/conf.d/uploads.ini
+      - ./wordpress_ads:/var/www/html
     networks:
       - ads-network
   
